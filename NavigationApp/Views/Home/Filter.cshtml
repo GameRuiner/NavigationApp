@@ -1,0 +1,44 @@
+﻿@model NavigationApp.Models.PlayersListViewModel
+@{
+    ViewBag.Title = "Filter";
+}
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Команда: </label>
+        @Html.DropDownList("team", Model.Teams as SelectList,
+                    htmlAttributes: new { @class = "form-control"})
+        <label class="control-label">Позиция на поле: </label>
+        @Html.DropDownList("position", Model.Positions as SelectList,
+                    htmlAttributes: new { @class = "form-control" })
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+    </div>
+</form>
+
+<table>
+    <tr>
+        <th>Имя игрока</th>
+        <th>Возраст</th>
+        <th>Позиция на поле</th>
+        <th>Команда</th>
+    </tr>
+
+    @foreach (var item in Model.Players)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team.Name)
+            </td>
+        </tr>
+    }
+</table>
+
